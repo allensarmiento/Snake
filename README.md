@@ -1,2 +1,5 @@
 # Snake
-Implementation of the Snake game.
+Implementation of the game Snake.
+
+## Language Used
+C++
