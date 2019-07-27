@@ -7,7 +7,7 @@ class GameScreen {
   void SetGameDimensions(int width, int height);
   void DisplayCenter(std::string message);
   void InitGameScreen();
-  void DisplayGameScreen();
+  char** GetGameScreen();
   ~GameScreen();
  private:
   char** game_screen;

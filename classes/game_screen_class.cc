@@ -30,13 +30,8 @@ void GameScreen::InitGameScreen() {
   }
 }
 
-void GameScreen::DisplayGameScreen() {
-  for (int i = 0; i < game_height; i++) {
-    for (int j = 0; j < game_width; j++) {
-      std::cout << game_screen[i][j];
-    }
-    std::cout << '\n';
-  }
+char** GameScreen::GetGameScreen() {
+  return game_screen;
 }
 
 GameScreen::~GameScreen() {
