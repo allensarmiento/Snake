@@ -2,7 +2,7 @@
 
 // Initialize player direction to up.
 Player::Player() {
-  direction  = "UP";
+  direction = "UP";
 }
 
 // Set player to center of the screen.
@@ -12,8 +12,19 @@ void Player::CenterPosition(int game_width, int game_height) {
 }
 
 // Set player position upon keyboard click.
-void Player::SetPosition(std::string direction) {
-
+void Player::SetPosition() {
+  if (direction == "UP") {
+    x_position--;
+  }
+  if (direction == "RIGHT") {
+    y_position++;
+  }
+  if (direction == "DOWN") {
+    x_position++;
+  }
+  if (direction == "LEFT") {
+    y_position--;
+  }
 }
 
 // Return player x position.
@@ -45,6 +56,19 @@ int Player::_keyboardhit() {
 // Set the keyboard direction.
 void Player::SetKeyboardInput(char key) {
   std::cout << "Key input: " << key << '\n';
+  if (key == 'w') {
+    direction = "UP";
+  }
+  if (key == 'a') {
+    direction = "LEFT";
+    std::cout << "Going Left" << '\n';
+  }
+  if (key == 's'){
+    direction = "DOWN";
+  }
+  if (key == 'd') {
+    direction = "RIGHT";
+  }
 }
 
 Player::~Player() {}

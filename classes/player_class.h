@@ -6,7 +6,7 @@ class Player {
  public:
    Player();
    void CenterPosition(int game_width, int game_height);
-   void SetPosition(std::string direction);
+   void SetPosition();
    int GetXPosition();
    int GetYPosition();
    int _keyboardhit();

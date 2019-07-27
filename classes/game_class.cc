@@ -40,9 +40,10 @@ void Game::Start() {
 
 // Update Player position.
 void Game::UpdatePlayer() {
+  player.SetPosition();
   int x = player.GetXPosition();
   int y = player.GetYPosition();
-  game_interface[x][y] = '|';
+  game_interface[x][y] = '#';
 }
 
 // Display the Game Interface.
@@ -56,9 +57,9 @@ void Game::DisplayGameInterface() {
 }
 
 // Sleep Function
-void Game::Sleep(int milliseconds) {
+void Game::Sleep(int fps) {
   clock_t time_end;
-  time_end = clock() + milliseconds * CLOCKS_PER_SEC/1000;
+  time_end = clock() + fps * CLOCKS_PER_SEC/1000;
   while (clock() < time_end) {}
 }
 
