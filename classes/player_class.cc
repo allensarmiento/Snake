@@ -1,16 +1,27 @@
 #include "player_class.h"
 
-Player::Player() {}
+// Initialize player direction to up.
+Player::Player() {
+  direction  = "UP";
+}
 
-void Player::SetPosition(int game_width, int game_height) {
+// Set player to center of the screen.
+void Player::CenterPosition(int game_width, int game_height) {
   x_position = game_height / 2;
   y_position = game_width / 2;
 }
 
+// Set player position upon keyboard click.
+void Player::SetPosition(std::string direction) {
+
+}
+
+// Return player x position.
 int Player::GetXPosition() {
   return x_position;
 }
 
+// Return player y position.
 int Player::GetYPosition() {
   return y_position;
 }
@@ -31,6 +42,7 @@ int Player::_keyboardhit() {
   return bytes_waiting;
 }
 
+// Set the keyboard direction.
 void Player::SetKeyboardInput(char key) {
   std::cout << "Key input: " << key << '\n';
 }

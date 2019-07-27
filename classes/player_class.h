@@ -1,15 +1,12 @@
 #include <iostream>
-#include <stdlib.h>
-#include <unistd.h>
 #include <sys/ioctl.h>
 #include <termios.h>
-// #include <stropts.h>
-#include <stdio.h>
 
 class Player {
  public:
    Player();
-   void SetPosition(int game_width, int game_height);
+   void CenterPosition(int game_width, int game_height);
+   void SetPosition(std::string direction);
    int GetXPosition();
    int GetYPosition();
    int _keyboardhit();
@@ -19,4 +16,5 @@ class Player {
    int x_position;
    int y_position;
    int bytes_waiting;
+   std::string direction;
 };
