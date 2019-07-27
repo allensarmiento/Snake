@@ -8,6 +8,7 @@ class Game {
   void SetDimensions(int width, int height);
   void SetTitle(std::string title);
   void Start();
+  void DisplayTitle();
   void DisplayGameInterface();
   void Blit();
   ~Game();

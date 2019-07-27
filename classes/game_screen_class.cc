@@ -13,11 +13,6 @@ void GameScreen::SetGameDimensions(int width, int height) {
   }
 }
 
-// Displays the message in the center of the corresponding game width.
-void GameScreen::DisplayCenter(std::string message) {
-  std::cout << std::setfill(' ') << std::setw(game_width/2 + message.length()/2) << message << '\n';
-}
-
 void GameScreen::InitGameScreen() {
   for (int i = 0; i < game_height; i++) {
     for (int j = 0; j < game_width; j++) {

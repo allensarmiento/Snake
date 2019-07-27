@@ -5,7 +5,6 @@ class GameScreen {
  public:
   GameScreen();
   void SetGameDimensions(int width, int height);
-  void DisplayCenter(std::string message);
   void InitGameScreen();
   char** GetGameScreen();
   ~GameScreen();

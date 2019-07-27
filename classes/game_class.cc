@@ -28,8 +28,13 @@ void Game::DisplayGameInterface() {
   }
 }
 
+// Displays the message in the center of the corresponding game width.
+void Game::DisplayTitle() {
+  std::cout << std::setfill(' ') << std::setw(game_width/2 + game_title.length()/2) << game_title << '\n';
+}
+
 void Game::Blit() {
-  game_screen.DisplayCenter(game_title);
+  DisplayTitle();
   DisplayGameInterface();
 }
 
