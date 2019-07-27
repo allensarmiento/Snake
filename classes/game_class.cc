@@ -2,7 +2,7 @@
 
 // Set default frames per second.
 Game::Game() {
-  fps = 200;
+  fps = 150;
 }
 
 // Set Game Dimensions; Player gets updated according to dimensions.
@@ -33,6 +33,9 @@ void Game::Start() {
       player.SetKeyboardInput(key);
     }
     system("clear");
+    // Redraw the game screen board to redraw the player.
+    game_screen.InitGameScreen();
+    game_interface = game_screen.GetGameScreen();
     Blit();
     Sleep(fps);
   }
