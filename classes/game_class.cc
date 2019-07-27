@@ -15,8 +15,16 @@ void Game::SetTitle(std::string title) {
   game_title = title;
 }
 
+// Handle game logic here
 void Game::Start() {
+  player.SetPosition(game_width, game_height);
   Blit();
+}
+
+void Game::UpdatePlayer() {
+  int x = player.GetXPosition();
+  int y = player.GetYPosition();
+  game_interface[x][y] = '|';
 }
 
 void Game::DisplayGameInterface() {
@@ -35,6 +43,7 @@ void Game::DisplayTitle() {
 
 void Game::Blit() {
   DisplayTitle();
+  UpdatePlayer();
   DisplayGameInterface();
 }
 

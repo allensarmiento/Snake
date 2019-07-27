@@ -1,8 +1,9 @@
-#include <iostream>
-
 class Player {
  public:
-   Player(int game_width, int game_height);
+   Player();
+   void SetPosition(int game_width, int game_height);
+   int GetXPosition();
+   int GetYPosition();
    ~Player();
  private:
    int x_position;
