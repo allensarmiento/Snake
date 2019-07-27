@@ -1,5 +1,11 @@
 #include <iostream>
 #include <iomanip>
+#include <stdlib.h>
+#include <sys/ioctl.h>
+// #include <stropts.h>
+#include <stdio.h>
+#include <termios.h>
+#include <unistd.h>
 #include "game_screen_class.h"
 #include "player_class.h"
 
@@ -11,6 +17,7 @@ class Game {
   void DisplayTitle();
   void UpdatePlayer();
   void DisplayGameInterface();
+  void Sleep(int milliseconds);
   void Start();
   void Blit();
   ~Game();
@@ -21,4 +28,5 @@ class Game {
    char** game_interface;
    GameScreen game_screen;
    Player player;
+   int fps;
 };

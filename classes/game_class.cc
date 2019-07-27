@@ -1,6 +1,10 @@
 #include "game_class.h"
 
-Game::Game() {}
+struct termios terminalSettings;
+
+Game::Game() {
+  fps = 200;
+}
 
 void Game::SetDimensions(int width, int height) {
   game_screen.SetGameDimensions(width, height);
@@ -8,6 +12,8 @@ void Game::SetDimensions(int width, int height) {
   game_height = height;
   game_screen.InitGameScreen();
   game_interface = game_screen.GetGameScreen();
+
+  player.SetPosition(game_width, game_height);
   // TODO: Set dimensions for the  right side interface
 }
 
@@ -17,8 +23,17 @@ void Game::SetTitle(std::string title) {
 
 // Handle game logic here
 void Game::Start() {
-  player.SetPosition(game_width, game_height);
-  Blit();
+  system("clear");
+  while (true) {
+    char key;
+    if (player._keyboardhit()) {
+      std::cin >> key;
+      player.SetKeyboardInput(key);
+    }
+    Blit();
+    Sleep(fps);
+    system("clear");
+  }
 }
 
 void Game::UpdatePlayer() {
@@ -34,6 +49,13 @@ void Game::DisplayGameInterface() {
     }
     std::cout << '\n';
   }
+}
+
+// Cross Platform Sleep Function
+void Game::Sleep(int milliseconds) {
+  clock_t time_end;
+  time_end = clock() + milliseconds * CLOCKS_PER_SEC/1000;
+  while (clock() < time_end) {}
 }
 
 // Displays the message in the center of the corresponding game width.
