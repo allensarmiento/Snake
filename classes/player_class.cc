@@ -9,6 +9,9 @@ Player::Player() {
 void Player::CenterPosition(int game_width, int game_height) {
   x_position = game_height / 2;
   y_position = game_width / 2;
+
+  x_body.push_back(x_position);
+  y_body.push_back(y_position);
 }
 
 // Set player position upon keyboard click.
@@ -77,6 +80,33 @@ void Player::SetKeyboardInput(char key) {
   if (key == 'd') {
     direction = "RIGHT";
   }
+}
+
+void Player::AddBody() {
+  if (direction == "UP") {
+    x_body.push_back(x_body[x_body.size()-1] - 1);
+    y_body.push_back(y_body[y_body.size()-1]);
+  }
+  if (direction == "DOWN") {
+    x_body.push_back(x_body[x_body.size()-1] + 1);
+    y_body.push_back(y_body[y_body.size()-1]);
+  }
+  if (direction == "LEFT") {
+    x_body.push_back(x_body[x_body.size()-1]);
+    y_body.push_back(y_body[y_body.size()-1] - 1);
+  }
+  if (direction == "RIGHT") {
+    x_body.push_back(x_body[x_body.size()-1]);
+    y_body.push_back(y_body[y_body.size()-1] + 1);
+  }
+}
+
+std::vector<int> Player::GetXBody() {
+  return x_body;
+}
+
+std::vector<int> Player::GetYBody() {
+  return y_body;
 }
 
 Player::~Player() {}

@@ -2,6 +2,7 @@
 #include <iomanip>
 #include <sys/ioctl.h>
 #include <termios.h>
+#include <vector>
 #include "game_screen_class.h"
 #include "player_class.h"
 #include "food_class.h"

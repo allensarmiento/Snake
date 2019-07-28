@@ -53,6 +53,14 @@ void Game::UpdatePlayer() {
   int x = player.GetXPosition();
   int y = player.GetYPosition();
   game_interface[x][y] = '#';
+
+  // std::vector<int> x = player.GetXBody();
+  // std::vector<int> y = player.GetYBody();
+  // for (int i = 0; i < x.size(); i++) {
+  //   for (int j = 0; j < y.size(); j++) {
+  //     game_interface[x[i]][y[j]] = '#';
+  //   }
+  // }
 }
 
 void Game::UpdateFood() {
