@@ -22,19 +22,35 @@ void Player::CenterPosition(int game_width, int game_height) {
 void Player::SetPosition() {
   if (direction == "UP") {
     x_position--;
+
+    for (int i = 0; i < x_body.size(); i++) {
+      x_body[i] -= 1;
+    }
   }
   if (direction == "RIGHT") {
     y_position++;
     // Check if collided with an object.
     // y_position++;
+
+    for (int i = 0; i < y_body.size(); i++) {
+      y_body[i] += 1;
+    }
   }
   if (direction == "DOWN") {
     x_position++;
+
+    for (int i = 0; i < x_body.size(); i++) {
+      x_body[i] += 1;
+    }
   }
   if (direction == "LEFT") {
     y_position--;
     // Check if collided with an object.
     // y_position--;
+
+    for (int i = 0; i < y_body.size(); i++) {
+      y_body[i] -= 1;
+    }
   }
 }
 
@@ -72,7 +88,6 @@ void Player::SetKeyboardInput(char key) {
   }
   if (key == 'a') {
     direction = "LEFT";
-    std::cout << "Going Left" << '\n';
   }
   if (key == 's'){
     direction = "DOWN";
