@@ -23,7 +23,7 @@ void Player::SetPosition() {
   if (direction == "RIGHT") {
     y_position++;
     // Check if collided with an object.
-    y_position++;
+    // y_position++;
   }
   if (direction == "DOWN") {
     x_position++;
@@ -31,7 +31,7 @@ void Player::SetPosition() {
   if (direction == "LEFT") {
     y_position--;
     // Check if collided with an object.
-    y_position--;
+    // y_position--;
   }
 }
 

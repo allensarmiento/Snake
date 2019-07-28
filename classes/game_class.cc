@@ -65,6 +65,17 @@ void Game::GetFoodPosition() {
   game_interface[x][y] = food.GetFoodSymbol();
 }
 
+bool Game::PlayerCollideFruit() {
+  int x_player = player.GetXPosition();
+  int y_player = player.GetYPosition();
+  int x_food = food.GetXFoodPosition();
+  int y_food = food.GetYFoodPosition();
+  if (x_player == x_food && y_player == y_food) {
+    return true;
+  }
+  return false;
+}
+
 // Display the Game Interface.
 void Game::DisplayGameInterface() {
   for (int i = 0; i < game_height; i++) {
@@ -91,6 +102,9 @@ void Game::DisplayTitle() {
 void Game::Blit() {
   DisplayTitle();
   UpdatePlayer();
+  if (PlayerCollideFruit()) {
+    UpdateFood();
+  }
   GetFoodPosition();
   DisplayGameInterface();
 }

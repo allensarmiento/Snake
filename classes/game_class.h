@@ -15,6 +15,7 @@ class Game {
   void UpdatePlayer();
   void UpdateFood();
   void GetFoodPosition();
+  bool PlayerCollideFruit();
   void DisplayGameInterface();
   void Sleep(int milliseconds);
   void Start();
