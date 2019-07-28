@@ -4,6 +4,7 @@
 #include <termios.h>
 #include "game_screen_class.h"
 #include "player_class.h"
+#include "food_class.h"
 
 class Game {
  public:
@@ -12,6 +13,8 @@ class Game {
   void SetTitle(std::string title);
   void DisplayTitle();
   void UpdatePlayer();
+  void UpdateFood();
+  void GetFoodPosition();
   void DisplayGameInterface();
   void Sleep(int milliseconds);
   void Start();
@@ -25,4 +28,5 @@ class Game {
    char** game_interface;
    GameScreen game_screen;
    Player player;
+   Food food;
 };

@@ -12,17 +12,25 @@ void Player::CenterPosition(int game_width, int game_height) {
 }
 
 // Set player position upon keyboard click.
+//
+// y_position increases/decreases by 2 to have the same feel as the x_position.
+// If y_position only increases by 1, it appears to be slower than the x_position.
+// This is most likely due to the default spacing in the terminal.
 void Player::SetPosition() {
   if (direction == "UP") {
     x_position--;
   }
   if (direction == "RIGHT") {
     y_position++;
+    // Check if collided with an object.
+    y_position++;
   }
   if (direction == "DOWN") {
     x_position++;
   }
   if (direction == "LEFT") {
+    y_position--;
+    // Check if collided with an object.
     y_position--;
   }
 }

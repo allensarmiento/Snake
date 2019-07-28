@@ -2,7 +2,7 @@
 
 // Set default frames per second.
 Game::Game() {
-  fps = 150;
+  fps = 200;
 }
 
 // Set Game Dimensions; Player gets updated according to dimensions.
@@ -13,6 +13,7 @@ void Game::SetDimensions(int width, int height) {
   game_screen.InitGameScreen();
   game_interface = game_screen.GetGameScreen();
   player.CenterPosition(game_width, game_height);
+  food.SetBoundaries(game_width, game_height);
   // TODO: Set dimensions for the  right side interface
 }
 
@@ -25,6 +26,10 @@ void Game::SetTitle(std::string title) {
 void Game::Start() {
   // Initial clearing of screen.
   system("clear");
+  // NOTE: This line of code is a test to see if the food lands on a random
+  // position each time. Eventually, will check for collision to know when
+  // to get the new position.
+  UpdateFood();
   // Game Loop: Read input and update game screen.
   while (true) {
     char key;
@@ -33,9 +38,10 @@ void Game::Start() {
       player.SetKeyboardInput(key);
     }
     system("clear");
-    // Redraw the game screen board to redraw the player.
+    // Set up game interface for redraw so update player.
     game_screen.InitGameScreen();
     game_interface = game_screen.GetGameScreen();
+    // Draw game screen.
     Blit();
     Sleep(fps);
   }
@@ -47,6 +53,16 @@ void Game::UpdatePlayer() {
   int x = player.GetXPosition();
   int y = player.GetYPosition();
   game_interface[x][y] = '#';
+}
+
+void Game::UpdateFood() {
+  food.SetFoodPosition();
+}
+
+void Game::GetFoodPosition() {
+  int x = food.GetXFoodPosition();
+  int y = food.GetYFoodPosition();
+  game_interface[x][y] = food.GetFoodSymbol();
 }
 
 // Display the Game Interface.
@@ -75,6 +91,7 @@ void Game::DisplayTitle() {
 void Game::Blit() {
   DisplayTitle();
   UpdatePlayer();
+  GetFoodPosition();
   DisplayGameInterface();
 }
 
