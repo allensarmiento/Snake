@@ -15,6 +15,7 @@ void Game::SetDimensions(int width, int height) {
   game_screen.InitGameScreen();
   game_interface = game_screen.GetGameScreen();
   player.CenterPosition(game_width, game_height);
+  enemy.SetPosition(game_width, game_height);
   food.SetBoundaries(game_width, game_height);
   // TODO: Set dimensions for the  right side interface
 }
@@ -48,10 +49,16 @@ void Game::Start() {
   std::cout << "Final score: " << score << '\n';
 }
 
+void Game::UpdateEnemy() {
+  int x_position = enemy.GetXPosition();
+  int y_position = enemy.GetYPosition();
+  game_interface[x_position][y_position] = ';';
+}
+
 // Update Player position.
 void Game::UpdatePlayer() {
   // Make sure player is not out of bounds.
-  if (PlayerCollideWall()) { return; }
+  if (PlayerCollideWall() || PlayerCollideEnemy()) { return; }
   player.SetPosition();
   std::vector<int> x = player.GetXBody();
   std::vector<int> y = player.GetYBody();
@@ -62,6 +69,10 @@ void Game::UpdatePlayer() {
 
 void Game::UpdateFood() {
   food.SetFoodPosition();
+  while (food.GetXFoodPosition() == enemy.GetXPosition() &&
+         food.GetYFoodPosition() == enemy.GetYPosition()) {
+    food.SetFoodPosition();
+  }
 }
 
 void Game::GetFoodPosition() {
@@ -85,6 +96,17 @@ bool Game::PlayerCollideWall() {
   int x_player = player.GetXPosition();
   int y_player = player.GetYPosition();
   if (game_interface[x_player][y_player] == '*') {
+    return true;
+  }
+  return false;
+}
+
+bool Game::PlayerCollideEnemy() {
+  int x_player = player.GetXPosition();
+  int y_player = player.GetYPosition();
+  int x_enemy = enemy.GetXPosition();
+  int y_enemy = enemy.GetYPosition();
+  if (x_player == x_enemy && y_player == y_enemy) {
     return true;
   }
   return false;
@@ -132,9 +154,9 @@ void Game::Blit() {
     player.AddBody();
     score++;
   }
-  if (PlayerCollideWall()) { playing = false; }
-  if (PlayerCollideSelf()) { playing = false; }
+  if (PlayerCollideWall() || PlayerCollideEnemy() || PlayerCollideSelf()) { playing = false; }
   GetFoodPosition();
+  UpdateEnemy();
   UpdatePlayer();
   std::cout << score << '\n';
   DisplayGameInterface();

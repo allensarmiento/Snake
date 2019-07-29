@@ -6,6 +6,7 @@
 #include "game_screen_class.h"
 #include "player_class.h"
 #include "food_class.h"
+#include "enemy_class.h"
 
 class Game {
  public:
@@ -13,12 +14,14 @@ class Game {
   void SetDimensions(int width, int height);
   void SetTitle(std::string title);
   void DisplayTitle();
+  void UpdateEnemy();
   void UpdatePlayer();
   void UpdateFood();
   void GetFoodPosition();
   bool PlayerCollideFruit();
   bool PlayerCollideWall();
   bool PlayerCollideSelf();
+  bool PlayerCollideEnemy();
   void DisplayGameInterface();
   void Sleep(int milliseconds);
   void Start();
@@ -35,4 +38,5 @@ class Game {
    Food food;
    bool playing;
    int score;
+   Enemy enemy;
 };
