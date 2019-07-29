@@ -18,6 +18,7 @@ class Game {
   void GetFoodPosition();
   bool PlayerCollideFruit();
   bool PlayerCollideWall();
+  bool PlayerCollideSelf();
   void DisplayGameInterface();
   void Sleep(int milliseconds);
   void Start();

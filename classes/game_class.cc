@@ -90,6 +90,17 @@ bool Game::PlayerCollideWall() {
   return false;
 }
 
+bool Game::PlayerCollideSelf() {
+  std::vector<int> x = player.GetXBody();
+  std::vector<int> y = player.GetYBody();
+  for (int i = 2; i < x.size(); i++) {
+    if (x[1] == x[i] && y[1] == y[i]) {
+      return true;
+    }
+  }
+  return false;
+}
+
 // Display the Game Interface.
 void Game::DisplayGameInterface() {
   for (int i = 0; i < game_height; i++) {
@@ -121,9 +132,8 @@ void Game::Blit() {
     player.AddBody();
     score++;
   }
-  if (PlayerCollideWall()) {
-    playing = false;
-  }
+  if (PlayerCollideWall()) { playing = false; }
+  if (PlayerCollideSelf()) { playing = false; }
   GetFoodPosition();
   UpdatePlayer();
   std::cout << score << '\n';
