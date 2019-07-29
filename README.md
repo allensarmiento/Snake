@@ -1,5 +1,5 @@
 # Snake
-Implementation of the game Snake the snake cannot collide with a wall, itself, or enemies.
+Implementation of the game Snake where the snake cannot collide with a wall, itself, or enemies.
 
 ## Language Used
 C++
