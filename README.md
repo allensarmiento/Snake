@@ -1,11 +1,22 @@
 # Snake
-Implementation of the game Snake where the snake cannot collide with a wall, itself, or enemies.
+Terminal console implementation of the game Snake where the snake cannot collide with a wall, itself, or enemies.
 
 ## Language Used
 C++
 
 ## How to Play:
 Move the snake player around with the following keys: W (UP), A (LEFT), S (DOWN), D (RIGHT). Collect as much food (F) as you can without colliding with the wall, yourself, or the enemies.
+
+## How to Execute:
+1. Download the repository.
+2. Go to the folder Snake and in your terminal execute the following:
+```
+make all
+```
+3. An Snake executable file should be created. Run it with the following:
+```
+./Snake
+```
 
 ## Implementation Details
 - Game Class
