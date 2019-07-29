@@ -12,34 +12,26 @@ void Player::CenterPosition(int game_width, int game_height) {
 
   x_body.push_back(x_position);
   y_body.push_back(y_position);
+  AddBody();
 }
 
 // Set player position upon keyboard click.
 void Player::SetPosition() {
   if (direction == "UP") {
-    for (int i = x_body.size() - 1; i > 0; i--) {
-      x_body[i] = x_body[i-1];
-      y_body[i] = y_body[i-1];
-    }
     x_body[0] -= 1;
-  } else if (direction == "RIGHT") {
-    for (int i = x_body.size() - 1; i > 0; i--) {
-      x_body[i] = x_body[i-1];
-      y_body[i] = y_body[i-1];
-    }
+  }
+  if (direction == "RIGHT") {
     y_body[0] += 1;
-  } else if (direction == "DOWN") {
-    for (int i = x_body.size() - 1; i > 0; i--) {
-      x_body[i] = x_body[i-1];
-      y_body[i] = y_body[i-1];
-    }
+  }
+  if (direction == "DOWN") {
     x_body[0] += 1;
-  } else if (direction == "LEFT") {
-    for (int i = x_body.size() - 1; i > 0; i--) {
-      x_body[i] = x_body[i-1];
-      y_body[i] = y_body[i-1];
-    }
+  }
+  if (direction == "LEFT") {
     y_body[0] -= 1;
+  }
+  for (int i = x_body.size() - 1; i > 0; i--) {
+    x_body[i] = x_body[i-1];
+    y_body[i] = y_body[i-1];
   }
 }
 
@@ -87,18 +79,21 @@ void Player::SetKeyboardInput(char key) {
 }
 
 void Player::AddBody() {
-  int x_back = x_body.back();
-  int y_back = y_body.back();
+  int x_back = x_body[x_body.size()-1];
+  int y_back = y_body[y_body.size()-1];
   if (direction == "UP") {
     x_body.push_back(x_back + 1);
     y_body.push_back(y_back);
-  } else if (direction == "DOWN") {
+  }
+  if (direction == "DOWN") {
     x_body.push_back(x_back - 1);
     y_body.push_back(y_back);
-  } else if (direction == "LEFT") {
+  }
+  if (direction == "LEFT") {
     x_body.push_back(x_back);
     y_body.push_back(y_back + 1);
-  } else if (direction == "RIGHT") {
+  }
+  if (direction == "RIGHT") {
     x_body.push_back(x_back);
     y_body.push_back(y_back - 1);
   }

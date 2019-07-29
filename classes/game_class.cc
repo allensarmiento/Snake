@@ -26,9 +26,7 @@ void Game::SetTitle(std::string title) {
 void Game::Start() {
   // Initial clearing of screen.
   system("clear");
-  // NOTE: This line of code is a test to see if the food lands on a random
-  // position each time. Eventually, will check for collision to know when
-  // to get the new position.
+  // Place food position.
   UpdateFood();
   // Game Loop: Read input and update game screen.
   while (true) {
@@ -52,12 +50,13 @@ void Game::UpdatePlayer() {
   player.SetPosition();
   std::vector<int> x = player.GetXBody();
   std::vector<int> y = player.GetYBody();
-  std::cout << "Last body:  " << x.back() << ", " << y.back() << '\n';
+  int score = 0;
+  std::cout << "Score: ";
   for (int i = 0; i < x.size(); i++) {
-    for (int j = 0; j < y.size(); j++) {
-      game_interface[x[i]][y[j]] = '#';
-    }
+    game_interface[x[i]][y[i]] = '#';
+    score++;
   }
+  std::cout << score-1 << '\n';
 }
 
 void Game::UpdateFood() {
