@@ -5,7 +5,7 @@ Game::Game() {
   fps = 200;
   playing = true;
   score = 1;
-  num_enemies = 5;
+  num_enemies = 10;
   for (int i = 0; i < num_enemies; i++) {
     enemies.push_back(Enemy());
   }
