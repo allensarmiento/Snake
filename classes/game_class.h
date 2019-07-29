@@ -17,6 +17,7 @@ class Game {
   void UpdateFood();
   void GetFoodPosition();
   bool PlayerCollideFruit();
+  bool PlayerCollideWall();
   void DisplayGameInterface();
   void Sleep(int milliseconds);
   void Start();
@@ -31,4 +32,6 @@ class Game {
    GameScreen game_screen;
    Player player;
    Food food;
+   bool playing;
+   int score;
 };

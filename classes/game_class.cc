@@ -3,6 +3,8 @@
 // Set default frames per second.
 Game::Game() {
   fps = 200;
+  playing = true;
+  score = 1;
 }
 
 // Set Game Dimensions; Player gets updated according to dimensions.
@@ -29,7 +31,7 @@ void Game::Start() {
   // Place food position.
   UpdateFood();
   // Game Loop: Read input and update game screen.
-  while (true) {
+  while (playing) {
     char key;
     if (player._keyboardhit()) {
       std::cin >> key;
@@ -43,20 +45,19 @@ void Game::Start() {
     Blit();
     Sleep(fps);
   }
+  std::cout << "Final score: " << score << '\n';
 }
 
 // Update Player position.
 void Game::UpdatePlayer() {
+  // Make sure player is not out of bounds.
+  if (PlayerCollideWall()) { return; }
   player.SetPosition();
   std::vector<int> x = player.GetXBody();
   std::vector<int> y = player.GetYBody();
-  int score = 0;
-  std::cout << "Score: ";
   for (int i = 0; i < x.size(); i++) {
     game_interface[x[i]][y[i]] = '#';
-    score++;
   }
-  std::cout << score-1 << '\n';
 }
 
 void Game::UpdateFood() {
@@ -75,6 +76,15 @@ bool Game::PlayerCollideFruit() {
   int x_food = food.GetXFoodPosition();
   int y_food = food.GetYFoodPosition();
   if (x_player == x_food && y_player == y_food) {
+    return true;
+  }
+  return false;
+}
+
+bool Game::PlayerCollideWall() {
+  int x_player = player.GetXPosition();
+  int y_player = player.GetYPosition();
+  if (game_interface[x_player][y_player] == '*') {
     return true;
   }
   return false;
@@ -105,12 +115,18 @@ void Game::DisplayTitle() {
 // Display the title, update player position and display game interface.
 void Game::Blit() {
   DisplayTitle();
+  std::cout << "Score: ";
   if (PlayerCollideFruit()) {
     UpdateFood();
     player.AddBody();
+    score++;
+  }
+  if (PlayerCollideWall()) {
+    playing = false;
   }
   GetFoodPosition();
   UpdatePlayer();
+  std::cout << score << '\n';
   DisplayGameInterface();
 }
 
