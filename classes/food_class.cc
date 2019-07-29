@@ -10,8 +10,8 @@ void Food::SetBoundaries(int game_width, int game_height) {
 }
 
 void Food::SetFoodPosition() {
-  x_food_position = (rand() % (x_boundary - 1)) + 2;
-  y_food_position = (rand() % (y_boundary - 1)) + 2;
+  x_food_position = (rand() % (x_boundary - 2)) + 2;
+  y_food_position = (rand() % (y_boundary - 2)) + 2;
 }
 
 char Food::GetFoodSymbol() {

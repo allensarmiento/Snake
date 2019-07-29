@@ -17,8 +17,6 @@ class Player {
    std::vector<int> GetYBody();
    ~Player();
  private:
-   int x_position;
-   int y_position;
    int bytes_waiting;
    std::string direction;
    std::vector<int> x_body;

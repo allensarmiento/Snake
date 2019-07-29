@@ -7,61 +7,50 @@ Player::Player() {
 
 // Set player to center of the screen.
 void Player::CenterPosition(int game_width, int game_height) {
-  x_position = game_height / 2;
-  y_position = game_width / 2;
+  int x_position = game_height / 2;
+  int y_position = game_width / 2;
 
   x_body.push_back(x_position);
   y_body.push_back(y_position);
 }
 
 // Set player position upon keyboard click.
-//
-// y_position increases/decreases by 2 to have the same feel as the x_position.
-// If y_position only increases by 1, it appears to be slower than the x_position.
-// This is most likely due to the default spacing in the terminal.
 void Player::SetPosition() {
   if (direction == "UP") {
-    x_position--;
-
-    for (int i = 0; i < x_body.size(); i++) {
-      x_body[i] -= 1;
+    for (int i = x_body.size() - 1; i > 0; i--) {
+      x_body[i] = x_body[i-1];
+      y_body[i] = y_body[i-1];
     }
-  }
-  if (direction == "RIGHT") {
-    y_position++;
-    // Check if collided with an object.
-    // y_position++;
-
-    for (int i = 0; i < y_body.size(); i++) {
-      y_body[i] += 1;
+    x_body[0] -= 1;
+  } else if (direction == "RIGHT") {
+    for (int i = x_body.size() - 1; i > 0; i--) {
+      x_body[i] = x_body[i-1];
+      y_body[i] = y_body[i-1];
     }
-  }
-  if (direction == "DOWN") {
-    x_position++;
-
-    for (int i = 0; i < x_body.size(); i++) {
-      x_body[i] += 1;
+    y_body[0] += 1;
+  } else if (direction == "DOWN") {
+    for (int i = x_body.size() - 1; i > 0; i--) {
+      x_body[i] = x_body[i-1];
+      y_body[i] = y_body[i-1];
     }
-  }
-  if (direction == "LEFT") {
-    y_position--;
-    // Check if collided with an object.
-    // y_position--;
-
-    for (int i = 0; i < y_body.size(); i++) {
-      y_body[i] -= 1;
+    x_body[0] += 1;
+  } else if (direction == "LEFT") {
+    for (int i = x_body.size() - 1; i > 0; i--) {
+      x_body[i] = x_body[i-1];
+      y_body[i] = y_body[i-1];
     }
+    y_body[0] -= 1;
   }
 }
 
-// Return player x position.
+// Return player x head position.
 int Player::GetXPosition() {
-  return x_position;
+  return x_body[0];
 }
 
-// Return player y position.
+// Return player y head position.
 int Player::GetYPosition() {
-  return y_position;
+  return y_body[0];
 }
 
 // Check Keyboard Hit or Not
@@ -98,21 +87,20 @@ void Player::SetKeyboardInput(char key) {
 }
 
 void Player::AddBody() {
+  int x_back = x_body.back();
+  int y_back = y_body.back();
   if (direction == "UP") {
-    x_body.push_back(x_body[x_body.size()-1] - 1);
-    y_body.push_back(y_body[y_body.size()-1]);
-  }
-  if (direction == "DOWN") {
-    x_body.push_back(x_body[x_body.size()-1] + 1);
-    y_body.push_back(y_body[y_body.size()-1]);
-  }
-  if (direction == "LEFT") {
-    x_body.push_back(x_body[x_body.size()-1]);
-    y_body.push_back(y_body[y_body.size()-1] - 1);
-  }
-  if (direction == "RIGHT") {
-    x_body.push_back(x_body[x_body.size()-1]);
-    y_body.push_back(y_body[y_body.size()-1] + 1);
+    x_body.push_back(x_back + 1);
+    y_body.push_back(y_back);
+  } else if (direction == "DOWN") {
+    x_body.push_back(x_back - 1);
+    y_body.push_back(y_back);
+  } else if (direction == "LEFT") {
+    x_body.push_back(x_back);
+    y_body.push_back(y_back + 1);
+  } else if (direction == "RIGHT") {
+    x_body.push_back(x_back);
+    y_body.push_back(y_back - 1);
   }
 }
 

@@ -50,12 +50,9 @@ void Game::Start() {
 // Update Player position.
 void Game::UpdatePlayer() {
   player.SetPosition();
-  // int x = player.GetXPosition();
-  // int y = player.GetYPosition();
-  // game_interface[x][y] = '#';
-
   std::vector<int> x = player.GetXBody();
   std::vector<int> y = player.GetYBody();
+  std::cout << "Last body:  " << x.back() << ", " << y.back() << '\n';
   for (int i = 0; i < x.size(); i++) {
     for (int j = 0; j < y.size(); j++) {
       game_interface[x[i]][y[j]] = '#';
@@ -109,12 +106,12 @@ void Game::DisplayTitle() {
 // Display the title, update player position and display game interface.
 void Game::Blit() {
   DisplayTitle();
-  UpdatePlayer();
   if (PlayerCollideFruit()) {
     UpdateFood();
     player.AddBody();
   }
   GetFoodPosition();
+  UpdatePlayer();
   DisplayGameInterface();
 }
 
