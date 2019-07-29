@@ -5,6 +5,10 @@ Game::Game() {
   fps = 200;
   playing = true;
   score = 1;
+  num_enemies = 5;
+  for (int i = 0; i < num_enemies; i++) {
+    enemies.push_back(Enemy());
+  }
 }
 
 // Set Game Dimensions; Player gets updated according to dimensions.
@@ -15,8 +19,10 @@ void Game::SetDimensions(int width, int height) {
   game_screen.InitGameScreen();
   game_interface = game_screen.GetGameScreen();
   player.CenterPosition(game_width, game_height);
-  enemy.SetPosition(game_width, game_height);
   food.SetBoundaries(game_width, game_height);
+  for (int i = 0; i < num_enemies; i++) {
+    enemies[i].SetPosition(game_width, game_height);
+  }
   // TODO: Set dimensions for the  right side interface
 }
 
@@ -49,16 +55,40 @@ void Game::Start() {
   std::cout << "Final score: " << score << '\n';
 }
 
-void Game::UpdateEnemy() {
-  int x_position = enemy.GetXPosition();
-  int y_position = enemy.GetYPosition();
-  game_interface[x_position][y_position] = ';';
+void Game::UpdateEnemies() {
+  for (int i = 0; i < num_enemies; i++) {
+    if (EnemyCollideWall(enemies[i])) {
+      int x_vector = enemies[i].GetXVector();
+      enemies[i].SetXVector(x_vector * -1);
+      int y_vector = enemies[i].GetYVector();
+      enemies[i].SetYVector(y_vector * -1);
+    }
+    int x_position = enemies[i].GetXPosition();
+    int y_position = enemies[i].GetYPosition();
+    enemies[i].SetXPosition(x_position + enemies[i].GetXVector());
+    enemies[i].SetYPosition(y_position + enemies[i].GetYVector());
+    x_position = enemies[i].GetXPosition();
+    y_position = enemies[i].GetYPosition();
+    game_interface[x_position][y_position] = ';';
+  }
+}
+
+bool Game::EnemyCollideWall(Enemy enemy) {
+  int x_enemy = enemy.GetXPosition();
+  int y_enemy = enemy.GetYPosition();
+  if (game_interface[x_enemy][y_enemy] == '*') {
+    return true;
+  }
+  return false;
 }
 
 // Update Player position.
 void Game::UpdatePlayer() {
   // Make sure player is not out of bounds.
-  if (PlayerCollideWall() || PlayerCollideEnemy()) { return; }
+  if (PlayerCollideWall()) { return; }
+  for (int i = 0; i < num_enemies; i++) {
+    if (PlayerCollideEnemy(enemies[i])) { return; }
+  }
   player.SetPosition();
   std::vector<int> x = player.GetXBody();
   std::vector<int> y = player.GetYBody();
@@ -69,10 +99,6 @@ void Game::UpdatePlayer() {
 
 void Game::UpdateFood() {
   food.SetFoodPosition();
-  while (food.GetXFoodPosition() == enemy.GetXPosition() &&
-         food.GetYFoodPosition() == enemy.GetYPosition()) {
-    food.SetFoodPosition();
-  }
 }
 
 void Game::GetFoodPosition() {
@@ -101,13 +127,15 @@ bool Game::PlayerCollideWall() {
   return false;
 }
 
-bool Game::PlayerCollideEnemy() {
-  int x_player = player.GetXPosition();
-  int y_player = player.GetYPosition();
+bool Game::PlayerCollideEnemy(Enemy enemy) {
   int x_enemy = enemy.GetXPosition();
   int y_enemy = enemy.GetYPosition();
-  if (x_player == x_enemy && y_player == y_enemy) {
-    return true;
+  std::vector<int> x_body = player.GetXBody();
+  std::vector<int> y_body = player.GetYBody();
+  for (int i = 0; i < x_body.size(); i++) {
+    if (x_body[i] == x_enemy && y_body[i] == y_enemy) {
+      return true;
+    }
   }
   return false;
 }
@@ -154,9 +182,12 @@ void Game::Blit() {
     player.AddBody();
     score++;
   }
-  if (PlayerCollideWall() || PlayerCollideEnemy() || PlayerCollideSelf()) { playing = false; }
+  if (PlayerCollideWall() || PlayerCollideSelf()) { playing = false; }
+  for (int i = 0; i < num_enemies; i++) {
+    if (PlayerCollideEnemy(enemies[i])) { playing = false; }
+  }
   GetFoodPosition();
-  UpdateEnemy();
+  UpdateEnemies();
   UpdatePlayer();
   std::cout << score << '\n';
   DisplayGameInterface();

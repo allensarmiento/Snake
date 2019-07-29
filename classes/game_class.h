@@ -14,14 +14,15 @@ class Game {
   void SetDimensions(int width, int height);
   void SetTitle(std::string title);
   void DisplayTitle();
-  void UpdateEnemy();
+  void UpdateEnemies();
+  bool EnemyCollideWall(Enemy enemy);
   void UpdatePlayer();
   void UpdateFood();
   void GetFoodPosition();
   bool PlayerCollideFruit();
   bool PlayerCollideWall();
   bool PlayerCollideSelf();
-  bool PlayerCollideEnemy();
+  bool PlayerCollideEnemy(Enemy enemy);
   void DisplayGameInterface();
   void Sleep(int milliseconds);
   void Start();
@@ -38,5 +39,6 @@ class Game {
    Food food;
    bool playing;
    int score;
-   Enemy enemy;
+   std::vector<Enemy> enemies;
+   int num_enemies;
 };
