@@ -4,6 +4,9 @@ Implementation of the game Snake where the snake cannot collide with a wall, its
 ## Language Used
 C++
 
+## How to Play:
+Move the snake player around with the following keys: W (UP), A (LEFT), S (DOWN), D (RIGHT). Collect as much food (F) as you can without colliding with the wall, yourself, or the enemies.
+
 ## Implementation Details
 - Game Class
 - Game Screen Class
@@ -12,7 +15,7 @@ C++
 - Enemy Class
 
 ## Notes
-The implementation is that if the snake has only one body, it can move in opposite directions because it is not colliding with itself. However, if the snake eats a food and gets another body part, it will no longer be able to move opposite directions because it will collide with itself. <br>
+The implementation is that if the snake has only one body, it can move in opposite directions because it is not colliding with itself. However, if the snake eats a food and gets another body part, it will no longer be able to move opposite directions because it will collide with itself. This can be changed by editing the possible directions available.<br>
 
 Enemies are semicolons (;) which move around the screen. If any part of the snake's body touches a semicolon, the game is over. <br>
 
