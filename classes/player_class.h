@@ -6,15 +6,15 @@
 class Player {
  public:
    Player();
-   void CenterPosition(int game_width, int game_height);
-   void SetPosition();
-   int GetXPosition();
-   int GetYPosition();
    int _keyboardhit();
    void SetKeyboardInput(char key);
-   void AddBody();
+   void SetPosition();
    std::vector<int> GetXBody();
    std::vector<int> GetYBody();
+   int GetXPosition();
+   int GetYPosition();
+   void AddBody();
+   void CenterPosition(int game_width, int game_height);
    ~Player();
  private:
    int bytes_waiting;

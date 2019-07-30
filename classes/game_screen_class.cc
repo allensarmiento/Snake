@@ -13,6 +13,12 @@ void GameScreen::SetGameDimensions(int width, int height) {
   }
 }
 
+// Return the game screen.
+char** GameScreen::GetGameScreen() {
+  return game_screen;
+}
+
+// Initialize the game screen to an empty game board.
 void GameScreen::InitGameScreen() {
   for (int i = 0; i < game_height; i++) {
     for (int j = 0; j < game_width; j++) {
@@ -25,10 +31,7 @@ void GameScreen::InitGameScreen() {
   }
 }
 
-char** GameScreen::GetGameScreen() {
-  return game_screen;
-}
-
+// Deallocate pointer data.
 GameScreen::~GameScreen() {
   for (int i = 0; i < game_height; i++) {
     delete[] game_screen[i];

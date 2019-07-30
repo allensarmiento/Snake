@@ -26,7 +26,7 @@ make all
 - Enemy Class
 
 ## Notes
-The implementation is that if the snake has only one body, it can move in opposite directions because it is not colliding with itself. However, if the snake eats a food and gets another body part, it will no longer be able to move opposite directions because it will collide with itself. This can be changed by editing the possible directions available.<br>
+The implementation is that if the snake has a body of 2 or less, it can move in opposite directions because it is not colliding with itself. With a body of 2, the positions of the first and second part will swap with each other, so a collision does not occur. However, if the snake eats a food and gets another body part, it will no longer be able to move opposite directions because it will collide with itself. This can be changed by editing the possible directions available.<br>
 
 Enemies are semicolons (;) which move around the screen. If any part of the snake's body touches a semicolon, the game is over. <br>
 

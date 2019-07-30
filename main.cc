@@ -1,8 +1,4 @@
-// Main Driver.
-//
-// Incorporate a game board that contains a game screen.
-// This will be used to show the score on the side.
-
+// Main Driver
 #include <ctime>
 #include <cstdlib>
 #include <iostream>
